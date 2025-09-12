@@ -18,6 +18,17 @@ async function loadLyrics() {
     lyrics = await response.json()
 }
 
+async function requestPermissions() {
+    try {
+        stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+        webcamVideo.srcObject = stream
+        startBtn.disabled = false
+    } catch (err) {
+        alert('Permissions for camera and microphone are required.')
+        startBtn.disabled = true
+    }
+}
+
 function updateLyrics(currentTime) {
     if (currentLyricIndex < lyrics.length - 1 && currentTime >= lyrics[currentLyricIndex + 1].time) {
         currentLyricIndex++
@@ -40,9 +51,6 @@ async function startRecording() {
 
     bgAudio.currentTime = 0
     await bgAudio.play()
-
-    stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true })
-    webcamVideo.srcObject = stream
 
     const audioContext = new AudioContext()
 
@@ -88,7 +96,6 @@ async function startRecording() {
 
     const canvasStream = canvas.captureStream(30)
     canvasStream.getVideoTracks().forEach((track) => mixedStream.addTrack(track))
-
     destination.stream.getAudioTracks().forEach((track) => mixedStream.addTrack(track))
 
     mediaRecorder = new MediaRecorder(mixedStream, { mimeType: 'video/webm' })
@@ -131,7 +138,11 @@ function stopRecording() {
     bgAudio.currentTime = 0
 }
 
+startBtn.disabled = true
+stopBtn.disabled = true
+
 startBtn.addEventListener('click', startRecording)
 stopBtn.addEventListener('click', stopRecording)
 
 loadLyrics()
+requestPermissions()
