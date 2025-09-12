@@ -1,0 +1,51 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    text-align: center;
+}
+
+#lyrics-container {
+    margin: 20px auto;
+    width: 80%;
+    font-size: 1.5em;
+    height: 50px;
+    line-height: 50px;
+}
+
+#lyrics-line {
+    color: gray;
+    font-weight: normal;
+}
+
+#lyrics-line.active {
+    color: #d62828;
+    font-weight: bold;
+}
+
+#webcam-video {
+    margin: 20px auto;
+    width: 480px;
+    height: 360px;
+    background: black;
+    border: 1px solid #ccc;
+}
+
+#controls {
+    margin-top: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 1em;
+    margin: 0 10px;
+    cursor: pointer;
+}
+
+a#download-link {
+    display: inline-block;
+    margin-left: 20px;
+    font-size: 1em;
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+}
