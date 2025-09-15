@@ -98,8 +98,12 @@ function drawFrame() {
         
     const currentText = lyrics[currentLyricIndex] ? lyrics[currentLyricIndex].text : ''
     ctx.font = '40px Arial'
-    ctx.fillStyle = 'red'
+    ctx.fillStyle = 'white'
     ctx.textAlign = 'center'
+    ctx.shadowColor = 'black'
+    ctx.shadowBlur = 6
+    ctx.lineWidth = 3
+    ctx.strokeStyle = 'black'
         
     const maxWidth = CANVAS_WIDTH - 40
     const lineHeight = 40
@@ -114,6 +118,9 @@ async function startRecording() {
     downloadLink.style.display = 'none'
     recordedChunks = []
     currentLyricIndex = 0
+
+    content.style.maxHeight = null
+    content.style.padding = "0 15px"
     
     if (liveCanvas) { liveCanvas.remove(); liveCanvas = null }
     if (webcamVideo) { webcamVideo.remove(); webcamVideo = null }
@@ -207,3 +214,16 @@ startBtn.addEventListener('click', startRecording)
 stopBtn.addEventListener('click', stopRecording)
 
 loadLyrics()
+
+const toggleBtn = document.getElementById("info-toggle")
+const content = document.getElementById("info-content")
+
+toggleBtn.addEventListener("click", () => {
+  if (content.style.maxHeight) {
+    content.style.maxHeight = null
+    content.style.padding = "0 15px"
+  } else {
+    content.style.maxHeight = content.scrollHeight + "px"
+    content.style.padding = "15px"
+  }
+})
