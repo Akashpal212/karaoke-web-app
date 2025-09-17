@@ -20,7 +20,7 @@ It allows users to **sing along with background music while lyrics are displayed
 1. Clone the repository:
    
    ```bash
-   https://github.com/Akashpal212/karaoke-web-app.git
+   git clone https://github.com/Akashpal212/karaoke-web-app.git
    cd karaoke-web-app
    npm start
 
